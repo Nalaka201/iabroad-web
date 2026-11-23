@@ -16,8 +16,22 @@ const quickLinks = [
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-white/10 bg-[#0c1f38] text-[#cfd9e6]">
-      <Container className="grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative border-t border-white/10 bg-gradient-to-b from-[#091b33] to-[#040d1a] text-[#cfd9e6] overflow-hidden">
+      {/* 3D Horizon Glow Line */}
+      <div
+        className="pointer-events-none absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-60"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -bottom-32 left-1/2 -translate-x-1/2 h-64 w-[600px] rounded-full blur-3xl opacity-25"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(201,162,39,.3), transparent 70%)",
+        }}
+        aria-hidden
+      />
+
+      <Container className="relative z-10 grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="mb-4">
             <Logo onLight={false} />

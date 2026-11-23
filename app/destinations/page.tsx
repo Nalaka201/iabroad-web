@@ -18,15 +18,17 @@ export default function DestinationsPage() {
         </p>
       </PageHero>
 
-      <Reveal className="py-24">
+      <section className="py-24">
         <Container>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {destinations.map((d) => (
-              <DestinationCard key={d.code} country={d} />
+            {destinations.map((d, i) => (
+              <Reveal key={d.code} delay={i * 90}>
+                <DestinationCard country={d} />
+              </Reveal>
             ))}
           </div>
         </Container>
-      </Reveal>
+      </section>
 
       <CtaBand />
     </>

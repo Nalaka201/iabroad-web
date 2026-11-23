@@ -10,6 +10,7 @@ import { DestinationCard } from "@/components/cards/DestinationCard";
 import { ServiceCard } from "@/components/cards/ServiceCard";
 import { TestimonialCard } from "@/components/cards/TestimonialCard";
 import { UniversityCard } from "@/components/cards/UniversityCard";
+import { ReefluxHeroVisual } from "@/components/ReefluxHeroVisual";
 import {
   destinations,
   featuredUniversities,
@@ -22,162 +23,188 @@ export default function HomePage() {
   const featured = featuredUniversities();
   return (
     <>
-      {/* ===== HERO ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0c1f38] via-primary-deep to-[#183a62] py-20 text-white lg:py-28">
-        {/* Ambient radial glow orbs */}
+      {/* ===== REEFLUX 3D HERO ===== */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#030a14] via-[#08172c] to-[#0c1f38] py-20 text-white lg:py-28">
+        {/* Subtle modern dot-grid texture */}
         <div
-          className="pointer-events-none absolute -right-32 -top-32 h-[520px] w-[520px] rounded-full"
+          className="pointer-events-none absolute inset-0 opacity-25"
           style={{
-            background:
-              "radial-gradient(circle, rgba(201,162,39,.20), transparent 65%)",
-          }}
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -bottom-32 -left-32 h-[480px] w-[480px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(37,99,235,.16), transparent 65%)",
+            backgroundImage:
+              "radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px)",
+            backgroundSize: "36px 36px",
           }}
           aria-hidden
         />
 
-        <Container className="relative grid items-center gap-12 lg:grid-cols-[1.12fr_0.88fr]">
-          <div>
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-accent backdrop-blur-xs">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Study Abroad Consultancy
-            </span>
-            <h1 className="mb-5 text-4xl font-black leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.25rem]">
+        {/* Ambient Reeflux volumetric glows */}
+        <div
+          className="pointer-events-none absolute -right-20 -top-20 h-[620px] w-[620px] rounded-full blur-3xl opacity-60"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(201,162,39,.25), rgba(99,102,241,.18), transparent 70%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -bottom-24 -left-24 h-[550px] w-[550px] rounded-full blur-3xl opacity-50"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(56,189,248,.2), rgba(168,85,247,.15), transparent 70%)",
+          }}
+          aria-hidden
+        />
+
+        {/* 3D Perspective Floor Grid */}
+        <div
+          className="pointer-events-none absolute bottom-0 left-0 right-0 h-64 reeflux-grid-floor opacity-70"
+          aria-hidden
+        />
+
+        <Container className="relative grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
+          {/* Left Column: Value Proposition & CTAs */}
+          <div className="z-10">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.08] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-accent backdrop-blur-xl shadow-lg">
+              <span className="flex h-2 w-2 rounded-full bg-accent animate-ping" />
+              <span>Study Abroad Consultancy</span>
+            </div>
+
+            <h1 className="mb-6 text-4xl font-black leading-[1.12] tracking-tight sm:text-5xl lg:text-[3.45rem]">
               Your Global Education{" "}
-              <span className="bg-gradient-to-r from-accent via-[#e5b838] to-[#f5d56b] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-accent via-[#f5d061] to-[#fef08a] bg-clip-text text-transparent underline decoration-accent/40 decoration-wavy underline-offset-8">
                 Journey Starts Here
               </span>
             </h1>
+
             <p className="mb-8 max-w-xl text-lg leading-relaxed text-[#d4dfed]">
               From university selection to visa and pre-departure, Ibroad
               Education guides students to the UK, USA, Canada, Australia,
               Germany and New Zealand with honest, expert advice.
             </p>
-            <div className="mb-10 flex flex-wrap gap-4">
-              <ButtonLink href="/universities" variant="accent" size="lg">
-                Explore Universities
+
+            <div className="mb-10 flex flex-wrap items-center gap-4">
+              <ButtonLink
+                href="/universities"
+                variant="accent"
+                size="lg"
+                className="shadow-xl shadow-accent/25 transition-all hover:shadow-accent/40 hover:-translate-y-0.5"
+              >
+                <span>Explore Universities</span>
+                <span className="text-sm font-bold">→</span>
               </ButtonLink>
-              <ButtonLink href="/about" variant="ghost" size="lg">
+              <ButtonLink
+                href="/about"
+                variant="ghost"
+                size="lg"
+                className="border-white/25 bg-white/[0.08] backdrop-blur-xl transition-all hover:border-white/60 hover:bg-white/[0.18] hover:-translate-y-0.5"
+              >
                 Our Services
               </ButtonLink>
             </div>
-            <div className="grid grid-cols-2 gap-6 border-t border-white/15 pt-7 sm:grid-cols-4">
-              <HeroStat value={stats.universities} label="Universities" />
-              <HeroStat value={stats.courses} label="Courses" />
-              <HeroStat value={stats.countries} label="Countries" />
-              <HeroStat value={stats.placed} label="Students Placed" />
+
+            {/* Elevated Stats Shelf */}
+            <div className="rounded-2xl border border-white/15 bg-white/[0.06] p-5 shadow-2xl backdrop-blur-xl">
+              <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+                <HeroStat value={stats.universities} label="Universities" />
+                <HeroStat value={stats.courses} label="Courses" />
+                <HeroStat value={stats.countries} label="Countries" />
+                <HeroStat value={stats.placed} label="Students Placed" />
+              </div>
             </div>
           </div>
 
-          <div className="hidden lg:block">
-            <div className="relative rounded-3xl border border-white/20 bg-white/[0.08] p-6 shadow-2xl backdrop-blur-md">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="flex items-center gap-2 text-lg font-bold text-white">
-                  Featured Universities
-                </h3>
-                <Badge variant="sample">Sample</Badge>
-              </div>
-              <div className="space-y-3">
-                {featured.slice(0, 3).map((u) => (
-                  <Link
-                    key={u.id}
-                    href={`/universities/${u.id}`}
-                    className="group flex items-center gap-3.5 rounded-xl border border-white/10 bg-white/[0.06] p-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-white/[0.14] hover:shadow-lg"
-                  >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent font-extrabold text-primary-deep shadow-sm transition-transform duration-200 group-hover:scale-105">
-                      {u.mono}
-                    </span>
-                    <span className="leading-tight">
-                      <b className="text-sm font-semibold text-white transition-colors group-hover:text-accent">
-                        {u.name}
-                      </b>
-                      <br />
-                      <small className="text-xs text-[#cfd9e6]">
-                        {u.city}, {u.countryName}
-                      </small>
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
+          {/* Right Column: Reeflux 3D Interactive Showcase */}
+          <div className="z-10 w-full">
+            <ReefluxHeroVisual featuredUniversities={featured} />
           </div>
         </Container>
       </section>
 
       {/* ===== DESTINATIONS ===== */}
-      <Reveal className="bg-white py-24">
+      <section className="bg-white py-24 relative overflow-hidden">
         <Container>
-          <SectionHeading
-            kicker="Where you can study"
-            title="Popular Study Destinations"
-            lead="Six destinations, each with distinct strengths, costs and post-study work pathways."
-          />
+          <Reveal>
+            <SectionHeading
+              kicker="Where you can study"
+              title="Popular Study Destinations"
+              lead="Six destinations, each with distinct strengths, costs and post-study work pathways."
+            />
+          </Reveal>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {destinations.slice(0, 6).map((d) => (
-              <DestinationCard key={d.code} country={d} />
+            {destinations.slice(0, 6).map((d, i) => (
+              <Reveal key={d.code} delay={i * 90}>
+                <DestinationCard country={d} />
+              </Reveal>
             ))}
           </div>
         </Container>
-      </Reveal>
+      </section>
 
       {/* ===== FEATURED UNIVERSITIES ===== */}
-      <Reveal className="bg-page py-24">
+      <section className="bg-page py-24 relative overflow-hidden">
         <Container>
-          <SectionHeading
-            kicker="Handpicked for you"
-            title="Featured Universities"
-            lead="A snapshot of partner institutions. Browse the full catalogue on the Universities page."
-          />
+          <Reveal>
+            <SectionHeading
+              kicker="Handpicked for you"
+              title="Featured Universities"
+              lead="A snapshot of partner institutions. Browse the full catalogue on the Universities page."
+            />
+          </Reveal>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((u) => (
-              <UniversityCard key={u.id} university={u} />
+            {featured.map((u, i) => (
+              <Reveal key={u.id} delay={i * 90}>
+                <UniversityCard university={u} />
+              </Reveal>
             ))}
           </div>
           <div className="mt-10 text-center">
-            <ButtonLink href="/universities" variant="outline" size="md">
-              View all universities
-            </ButtonLink>
+            <Reveal delay={300}>
+              <ButtonLink href="/universities" variant="outline" size="md">
+                View all universities
+              </ButtonLink>
+            </Reveal>
           </div>
         </Container>
-      </Reveal>
+      </section>
 
       {/* ===== SERVICES ===== */}
-      <Reveal className="bg-white py-24">
+      <section className="bg-white py-24 relative overflow-hidden">
         <Container>
-          <SectionHeading
-            kicker="What we do"
-            title="Our Services"
-            lead="Four structured services that take you from first question to first day on campus."
-          />
+          <Reveal>
+            <SectionHeading
+              kicker="What we do"
+              title="Our Services"
+              lead="Four structured services that take you from first question to first day on campus."
+            />
+          </Reveal>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((s) => (
-              <ServiceCard key={s.title} service={s} />
+            {services.map((s, i) => (
+              <Reveal key={s.title} delay={i * 80}>
+                <ServiceCard service={s} />
+              </Reveal>
             ))}
           </div>
         </Container>
-      </Reveal>
+      </section>
 
       {/* ===== TESTIMONIALS ===== */}
-      <Reveal className="bg-page py-24">
+      <section className="bg-page py-24 relative overflow-hidden">
         <Container>
-          <SectionHeading
-            kicker="Student voices"
-            title="What Students Say"
-            lead="Sample testimonials shown until live reviews are collected."
-          />
+          <Reveal>
+            <SectionHeading
+              kicker="Student voices"
+              title="What Students Say"
+              lead="Sample testimonials shown until live reviews are collected."
+            />
+          </Reveal>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {testimonials.map((t) => (
-              <TestimonialCard key={t.name} testimonial={t} />
+            {testimonials.map((t, i) => (
+              <Reveal key={t.name} delay={i * 90}>
+                <TestimonialCard testimonial={t} />
+              </Reveal>
             ))}
           </div>
         </Container>
-      </Reveal>
+      </section>
 
       <CtaBand />
     </>
@@ -186,11 +213,11 @@ export default function HomePage() {
 
 function HeroStat({ value, label }: { value: number; label: string }) {
   return (
-    <div>
-      <div className="text-3xl font-black leading-none text-accent sm:text-4xl">
+    <div className="flex flex-col">
+      <div className="text-3xl font-black tracking-tight leading-none text-accent sm:text-4xl">
         <StatCounter value={value} />
       </div>
-      <div className="mt-2 text-xs font-medium text-[#d4dfed] sm:text-sm">
+      <div className="mt-2 text-xs font-semibold text-[#d4dfed] sm:text-sm">
         {label}
       </div>
     </div>

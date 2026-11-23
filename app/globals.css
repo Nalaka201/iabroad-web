@@ -34,14 +34,17 @@
   html {
     scroll-behavior: smooth;
   }
+
   body {
     @apply bg-page text-ink font-sans antialiased;
     text-rendering: optimizeLegibility;
   }
+
   ::selection {
     background-color: #c9a227;
     color: #16314f;
   }
+
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
@@ -49,16 +52,130 @@
   }
 }
 
-/* Reveal-on-scroll (used by components/Reveal.tsx) */
+/* 3D Scroll Reveal Utilities (used by components/Reveal.tsx) */
 @layer utilities {
-  .reveal {
+
+  .reveal,
+  .reveal-fade {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(24px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
   }
-  .reveal.is-in {
+
+  .reveal.is-in,
+  .reveal-fade.is-in {
     opacity: 1;
     transform: none;
+  }
+
+  .reveal-3d {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(10deg) translateY(35px) scale(0.97);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-3d.is-in {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+  }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.94) translateY(20px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-scale.is-in {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ============================================================
+   Reeflux 3D Animation & Perspective Keyframes
+   ============================================================ */
+@keyframes reeflux-float {
+
+  0%,
+  100% {
+    transform: translateZ(85px) translateY(0px);
+  }
+
+  50% {
+    transform: translateZ(85px) translateY(-12px);
+  }
+}
+
+@keyframes reeflux-float-reverse {
+
+  0%,
+  100% {
+    transform: translateZ(110px) translateY(0px);
+  }
+
+  50% {
+    transform: translateZ(110px) translateY(12px);
+  }
+}
+
+@keyframes orbit-ring-gold {
+  from {
+    transform: rotateX(68deg) rotateY(15deg) rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateX(68deg) rotateY(15deg) rotateZ(360deg);
+  }
+}
+
+@keyframes orbit-ring-sky {
+  from {
+    transform: rotateX(42deg) rotateY(-35deg) rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateX(42deg) rotateY(-35deg) rotateZ(360deg);
+  }
+}
+
+.reeflux-grid-floor {
+  background-image:
+    linear-gradient(to right, rgba(201, 162, 39, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.14) 1px, transparent 1px);
+  background-size: 44px 44px;
+  transform: perspective(600px) rotateX(72deg) translateY(60px);
+  transform-origin: 50% 100%;
+  mask-image: radial-gradient(ellipse 90% 65% at 50% 100%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 65% at 50% 100%, black 20%, transparent 80%);
+}
+
+/* User-friendly Touch & Motion Safety */
+@media (hover: none) {
+
+  /* Prevent any touch lag on mobile devices */
+  .reveal-3d {
+    transform: perspective(600px) rotateX(4deg) translateY(20px);
+  }
+
+  .reveal-3d.is-in {
+    transform: perspective(600px) rotateX(0deg) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
